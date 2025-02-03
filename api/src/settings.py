@@ -5,8 +5,8 @@ class Settings(BaseSettings):
     DB_HOST: str = "localhost"
     DB_PORT: int = 5432
     DB_NAME: str = "bets"
-    DB_USER: str = "maker"
-    DB_PASSWORD: str = "maker"
+    DB_USER: str = "postgres"
+    DB_PASSWORD: str = "postgres"
     DB_DRIVER: str = "postgresql+asyncpg"
     REDIS_STORAGE_HOST: str = "localhost"
     REDIS_STORAGE_PORT: int = 6379
