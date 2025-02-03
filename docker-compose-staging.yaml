@@ -3,7 +3,7 @@ services:
   bets_db:
     image: postgres:16.2-alpine
     restart: always
-    hostname: bets_db
+    container_name: bets_db
     shm_size: 256mb
     environment:
       - POSTGRES_USER=${DB_USER}
@@ -17,3 +17,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+
+  bets_storage:
+    image: redis:7.2.4-alpine
+    restart: always
+    container_name: bets_storage
+    ports:
+      - '6379:6379'
