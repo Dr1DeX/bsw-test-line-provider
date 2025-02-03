@@ -1,9 +1,8 @@
-from datetime import datetime
+import decimal
 
 from sqlalchemy import (
+    Enum,
     Numeric,
-    String,
-    TIMESTAMP,
 )
 from sqlalchemy.orm import (
     Mapped,
@@ -11,15 +10,15 @@ from sqlalchemy.orm import (
 )
 
 from src.infrastructure.database import Base
+from src.status import EventStatus
 
 
-class Events(Base):
-    __tablename__ = "Events"
+class Bets(Base):
+    __tablename__ = "Bets"
 
     event_id: Mapped[int] = mapped_column(primary_key=True, nullable=False, autoincrement=True)
-    coefficient: Mapped[float] = mapped_column(Numeric(5, 2), nullable=False)
-    deadline: Mapped[datetime] = mapped_column(TIMESTAMP, nullable=False)
-    status: Mapped[str] = mapped_column(String(20), nullable=False)
+    sum_bet: Mapped[decimal.Decimal] = mapped_column(Numeric(100, 2), nullable=False)
+    status: Mapped[EventStatus] = mapped_column(Enum(EventStatus), nullable=False)
 
     def __repr__(self):
-        return f"<Event(id={self.id}, odds={self.odds}, deadline={self.deadline}, status={self.status})>"
+        return f"<Bet(id={self.event_id}, status={self.status})>"
