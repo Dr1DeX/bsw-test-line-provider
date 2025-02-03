@@ -38,3 +38,23 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+  api:
+    container_name: api
+    restart: always
+    build:
+      context: .
+      dockerfile: .docker/dev/api/Dockerfile
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env.staging
+  nginx:
+    container_name: nginx
+    build:
+      context: .docker/dev/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+    ports:
+      - '80:80'
+      - '443:443'
