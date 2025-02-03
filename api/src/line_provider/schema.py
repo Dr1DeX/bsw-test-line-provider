@@ -9,7 +9,7 @@ from src.status import EventStatus
 class EventBaseSchema(BaseModel):
     coefficient: decimal.Decimal
     deadline: datetime
-    status: EventStatus
+    status: EventStatus = EventStatus.NEW
 
 
 class EventCreateSchema(EventBaseSchema):
@@ -17,6 +17,7 @@ class EventCreateSchema(EventBaseSchema):
 
 
 class EventUpdateSchema(BaseModel):
+    event_id: str
     status: EventStatus
 
 

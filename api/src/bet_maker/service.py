@@ -43,5 +43,5 @@ class BetService:
 
     async def get_bets(self) -> list[BetsSchema]:
         bets = await self.bet_read_repository.get_bets()
-        bets_schema = [BetsSchema.model_validate(bet) for bet in bets]
+        bets_schema = [BetsSchema(event_id=bet.event_id, status=bet.status) for bet in bets]
         return bets_schema

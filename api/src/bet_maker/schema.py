@@ -15,7 +15,3 @@ class BetsCreateSchema(BetsBaseSchema):
 
 class BetsSchema(BetsBaseSchema):
     status: EventStatus
-
-
-class BetsUpdateSchema(BetsSchema):
-    pass

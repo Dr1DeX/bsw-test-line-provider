@@ -15,7 +15,7 @@ services:
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${DB_USER}" ]
       interval: 30s
-      timeout: 10s
+      timeout: 12s
       retries: 5
 
   bets_storage:
@@ -48,6 +48,9 @@ services:
       - '8080:8080'
     env_file:
       - .env.staging
+    depends_on:
+      bets_db:
+        condition: service_healthy
   nginx:
     container_name: nginx
     build:
