@@ -8,7 +8,14 @@ class Settings(BaseSettings):
     DB_USER: str = "maker"
     DB_PASSWORD: str = "maker"
     DB_DRIVER: str = "postgresql+asyncpg"
+    REDIS_STORAGE_HOST: str = "localhost"
+    REDIS_STORAGE_PORT: int = 6379
+    REDIS_STORAGE_DB: int = 0
+    BROKER_URL: str = "amqp://guest:guest@localhost:5672"
 
     @property
     def db_url(self):
         return f"{self.DB_DRIVER}://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}"
+
+
+settings = Settings()
