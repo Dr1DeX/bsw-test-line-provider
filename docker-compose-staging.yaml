@@ -15,7 +15,7 @@ services:
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U ${DB_USER}" ]
       interval: 30s
-      timeout: 10s
+      timeout: 12s
       retries: 5
 
   bets_storage:
@@ -38,3 +38,26 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
+  api:
+    container_name: api
+    restart: always
+    build:
+      context: .
+      dockerfile: .docker/dev/api/Dockerfile
+    ports:
+      - '8080:8080'
+    env_file:
+      - .env.staging
+    depends_on:
+      bets_db:
+        condition: service_healthy
+  nginx:
+    container_name: nginx
+    build:
+      context: .docker/dev/nginx
+      dockerfile: Dockerfile
+    depends_on:
+      - api
+    ports:
+      - '80:80'
+      - '443:443'
