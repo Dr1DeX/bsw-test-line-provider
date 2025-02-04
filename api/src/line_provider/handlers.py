@@ -3,6 +3,7 @@ from typing import Annotated
 from fastapi import (
     APIRouter,
     Depends,
+    status,
 )
 
 from src.dependency import get_line_provider_service
@@ -16,9 +17,7 @@ from src.line_provider.service import LineProviderService
 router = APIRouter(prefix="/api/v1/provider", tags=["provider"])
 
 
-@router.post(
-    "/event",
-)
+@router.post("/event", status_code=status.HTTP_201_CREATED)
 async def create_event(
     line_provider_service: Annotated[LineProviderService, Depends(get_line_provider_service)],
     event: EventCreateSchema,
@@ -32,3 +31,4 @@ async def update_event_status(
     new_status: EventUpdateSchema,
 ):
     await line_provider_service.update_event_status(new_status=new_status)
+    return {"message": "event updated!"}
