@@ -1,14 +1,11 @@
-import decimal
-from datetime import datetime
-
 from pydantic import BaseModel
 
 from src.status import EventStatus
 
 
 class EventBaseSchema(BaseModel):
-    coefficient: decimal.Decimal
-    deadline: datetime
+    coefficient: float
+    deadline: int
     status: EventStatus = EventStatus.NEW
 
 
@@ -22,7 +19,7 @@ class EventUpdateSchema(BaseModel):
 
 
 class EventSchema(EventBaseSchema):
-    event_id: int
+    event_id: str
 
 
 class EventStatusSchema(BaseModel):

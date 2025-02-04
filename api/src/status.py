@@ -2,6 +2,6 @@ import enum
 
 
 class EventStatus(enum.Enum):
-    NEW = 1
-    FINISHED_WIN = 2
-    FINISHED_LOSE = 3
+    NEW = "NEW"
+    FINISHED_WIN = "FINISHED_WIN"
+    FINISHED_LOSE = "FINISHED_LOSE"

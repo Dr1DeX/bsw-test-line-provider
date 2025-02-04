@@ -16,7 +16,7 @@ from src.status import EventStatus
 class Bets(Base):
     __tablename__ = "Bets"
 
-    event_id: Mapped[int] = mapped_column(primary_key=True, nullable=False, autoincrement=True)
+    event_id: Mapped[str] = mapped_column(primary_key=True, nullable=False)
     sum_bet: Mapped[decimal.Decimal] = mapped_column(Numeric(100, 2), nullable=False)
     status: Mapped[EventStatus] = mapped_column(Enum(EventStatus), nullable=False)
 
