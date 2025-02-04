@@ -4,6 +4,13 @@ from unittest.mock import AsyncMock
 
 import pytest
 
+from tests.fixtures.bet_maker.bet_maker_schema import (
+    TestBetBaseSchema,
+    TestBetCreateSchema,
+    TestBetsSchema,
+    TestEventSchema,
+)
+
 
 @dataclass
 class FakeBetService:
@@ -22,6 +29,18 @@ class FakeBetService:
         if action == "update_event":
             await self.bet_write_repository.update_status_bet(event_id=event_id, status=status)
             return 1
+
+    async def get_events(self) -> list[TestEventSchema]:
+        events = await self.bet_read_repository.get_events()
+        return [TestEventSchema.model_validate(event) for event in events]
+
+    async def get_bets(self) -> list[TestBetsSchema]:
+        bets = await self.bet_read_repository.get_bets()
+        return [TestBetsSchema(event_id=bet.event_id, status=bet.status) for bet in bets]
+
+    async def create_bet(self, bet: TestBetCreateSchema) -> TestBetBaseSchema:
+        event_id = await self.bet_write_repository.create_bet(bet=bet)
+        return TestBetBaseSchema(event_id=event_id)
 
 
 @pytest.fixture

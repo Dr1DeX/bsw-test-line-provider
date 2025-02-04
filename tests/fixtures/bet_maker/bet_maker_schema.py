@@ -1,6 +1,10 @@
 import enum
+from decimal import Decimal
 
-from pydantic import BaseModel
+from pydantic import (
+    BaseModel,
+    Field,
+)
 
 
 class TestEventStatus(enum.Enum):
@@ -19,3 +23,12 @@ class TestEventSchema(BaseModel):
     coefficient: float
     deadline: int
     status: TestEventStatus = TestEventStatus.NEW
+
+
+class TestBetCreateSchema(BaseModel):
+    event_id: str
+    sum_bet: Decimal = Field(..., gt=0)
+
+
+class TestBetBaseSchema(BaseModel):
+    event_id: str
