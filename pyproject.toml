@@ -7,12 +7,16 @@ requires-python = ">=3.11"
 dependencies = [
     "aio-pika>=9.5.4",
     "alembic>=1.14.1",
+    "anyio>=4.8.0",
     "asyncpg>=0.30.0",
     "fastapi[standard]>=0.115.8",
     "pre-commit>=4.1.0",
     "psycopg2-binary>=2.9.10",
     "pydantic-settings>=2.7.1",
     "pytest>=8.3.4",
+    "pytest-asyncio>=0.25.3",
+    "pytest-twisted>=1.14.3",
     "redis>=5.2.1",
     "sqlalchemy>=2.0.37",
+    "twisted>=24.11.0",
 ]
