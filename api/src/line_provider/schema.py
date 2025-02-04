@@ -20,7 +20,3 @@ class EventUpdateSchema(BaseModel):
 
 class EventSchema(EventBaseSchema):
     event_id: str
-
-
-class EventStatusSchema(BaseModel):
-    status: EventStatus
