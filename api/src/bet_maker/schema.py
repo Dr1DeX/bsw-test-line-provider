@@ -1,21 +1,15 @@
-import decimal
-
 from pydantic import BaseModel
 
 from src.status import EventStatus
 
 
 class BetsBaseSchema(BaseModel):
-    event_id: int
+    event_id: str
 
 
 class BetsCreateSchema(BetsBaseSchema):
-    sum_bet: decimal.Decimal
+    sum_bet: float
 
 
 class BetsSchema(BetsBaseSchema):
     status: EventStatus
-
-
-class BetsUpdateSchema(BetsSchema):
-    pass
