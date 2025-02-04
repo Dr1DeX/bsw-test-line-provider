@@ -10,6 +10,7 @@ ___
 ## Запуск
 ### Запуск сервиса с помощью `make run-staging`
 ### Запуск с помощью `docker-compose -f docker-compose-staging.yaml --env-file .env.staging up -d --build --force-recreate`
+### API сервиса будет доступен по адресу http://localhost/docs
 
 ___
 
